@@ -8,7 +8,7 @@ RUN npm install node-ansible
 
 WORKDIR /LTE-Ansible-
 
-COPY ./playbooks
+COPY ./ . 
 
 EXPOSE 15000
 
