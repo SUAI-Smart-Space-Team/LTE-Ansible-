@@ -1,0 +1,25 @@
+- name: Delete rule
+  hosts: all
+  become: yes
+
+  vars:
+    ip_in: "{{ ip_in }}"
+    ip_out: "{{ ip_out }}"
+
+  tasks:
+
+  - name: Show iptables
+    command: > 
+      iptables -t nat -v -L POSTROUTING -n --line-number
+    register: out
+  - debug: var=out.stdout_lines
+
+  - name: Delete rule
+    command: >
+      iptables -t nat -D POSTROUTING -s "{{ ip_in }}"/24 -j SNAT --to-source "{{ ip_out }}"
+
+  - name: Show iptables
+    command: >
+      iptables -t nat -v -L POSTROUTING -n --line-number
+    register: out
+  - debug: var=out.stdout_lines

@@ -1,0 +1,15 @@
+- name: Delete all rules
+  hosts: all
+  become: yes
+
+  tasks:
+
+  - name: Delete rules
+    command: >
+      sudo iptables -t nat --flush
+ 
+  - name: Show iptables
+    command: > 
+      iptables -t nat -v -L POSTROUTING -n --line-number
+    register: out
+  - debug: var=out.stdout_lines

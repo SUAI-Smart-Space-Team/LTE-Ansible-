@@ -1,0 +1,24 @@
+- name: Modify IP
+  hosts: all
+  become: yes
+
+  vars:
+    interface: "{{ interface }}"
+    ip_in_new: "{{ ip_in_new }}"
+
+  tasks:
+
+  - name: Show iptables
+    command: >
+      ip a
+    register: out
+  - debug: var=out.stdout_lines
+
+  - name: Add rule ip_in and ip_out
+    command: >
+      ifconfig "{{ interface }}" "{{ ip_in_new }}" netmask 255.255.255.0 up
+  - name: Show iptables
+    command: >
+      ip a 
+    register: out
+  - debug: var=out.stdout_lines

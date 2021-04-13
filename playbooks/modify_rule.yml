@@ -1,0 +1,27 @@
+- name: Modify rule
+  hosts: all
+  become: yes
+
+  vars:
+    ip_in_old: "{{ ip_in_old }}"
+    ip_out_old: "{{ ip_out_old }}"
+    ip_in_new: "{{ ip_in_new }}"
+    ip_out_new: "{{ ip_out_new}}"
+
+  tasks:
+
+  - name: Show iptables
+    command: >
+      iptables -t nat -v -L POSTROUTING -n --line-number
+    register: out
+  - debug: var=out.stdout_lines
+
+  - name: Add rule ip_in and ip_out
+    shell: >
+            iptables -t nat -v -L POSTROUTING -n --line-number | awk '{if ($9 == "{{ ip_in_old }}/24" && $11 == "to:{{ ip_out_old }}" && $1 ~ /[0-9]/) system("iptables -t nat -R POSTROUTING "$1" -s {{ ip_in_new }}/24 -j SNAT --to-source {{ ip_out_new }}")}' 
+
+  - name: Show iptables
+    command: > 
+      iptables -t nat -v -L POSTROUTING -n --line-number
+    register: out
+  - debug: var=out.stdout_lines

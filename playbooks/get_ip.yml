@@ -1,0 +1,22 @@
+- name: Get IP 
+  hosts: all
+  become: yes
+
+  vars:
+    ip_in: "{{ip_in}}"
+
+  tasks:
+
+  - name: Task Ping
+    ping:
+
+            # - name: Task iptables show
+            # iptables:
+            # table: nat
+            # chain: POSTROUTING
+
+  - name: Show my out IP
+    shell: >
+      iptables -t nat -v -L POSTROUTING -n --line-number | awk '{if ($1 ~ /[0-9]/ && $9 == "{{ip_in}}/24") print substr($11, 4, length($11))}'
+    register: out
+  - debug: var=out.stdout_lines

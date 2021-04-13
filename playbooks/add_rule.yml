@@ -1,0 +1,19 @@
+- name: Add Rule
+  hosts: all
+  become: yes
+
+  vars:
+    ip_in: "{{ ip_in }}"
+    ip_out: "{{ ip_out }}"
+
+  tasks:
+
+  - name: Add rule ip_in and ip_out
+    command: >
+      sudo iptables -t nat -A POSTROUTING -s "{{ ip_in }}"/24 -j SNAT --to-source "{{ ip_out }}"
+ 
+  - name: Show iptables
+    command: > 
+      iptables -t nat -v -L POSTROUTING -n --line-number
+    register: out
+  - debug: var=out.stdout_lines

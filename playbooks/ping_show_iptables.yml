@@ -1,0 +1,19 @@
+- name: Ping and Show iptables Playbook 
+  hosts: all
+  become: yes 
+
+  tasks:
+
+  - name: Task Ping
+    ping:
+
+            # - name: Task iptables show
+            # iptables:
+            # table: nat
+            # chain: POSTROUTING
+
+  - name: Task iptables show cmd
+    command: >
+      sudo iptables -t nat -v -L POSTROUTING -n --line-number
+    register: out
+  - debug: var=out.stdout_lines
