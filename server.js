@@ -135,7 +135,7 @@ server.on('message', (msg, rinfo) => {
 server.on('listening', () => {
   const address = server.address();
   console.log(`server listening ${address.address}:${address.port}`);
-  console.log('path_to_playbook = ' + path_to_playbook);
+  console.log('path_to_playbook = ' + path);
 });
 
 server.bind(port);
