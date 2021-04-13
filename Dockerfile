@@ -1,7 +1,6 @@
 FROM python
 ENV NODE_ENV=production
-RUN apt-get update && apt install git python3-pip
-RUN update-alternatives --install /usr/bin/python /usr/bin/python3 2
+RUN apt-get update && apt -y --force-yes install git python3-pip
 RUN pip install ansible
 RUN apt install nodejs npm
 RUN npm install node-ansible
