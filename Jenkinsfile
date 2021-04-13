@@ -7,9 +7,9 @@ pipeline {
              steps {
                script {
                    sh '''
-                   make image VERSION=lte_ansible BRANCH=null FILE=./Dockerfile
-                   make push VERSION=lte_ansible
-                   make pull VERSION=lte_ansible 
+                   make image VERSION=lte(ansible) BRANCH=null FILE=./Dockerfile
+                   make push VERSION=lte(ansible)
+                   make pull VERSION=lte(ansible) 
                    '''
                    
                }
