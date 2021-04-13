@@ -1,4 +1,4 @@
-FROM ubuntu:20
+FROM ubuntu
 ENV NODE_ENV=production
 RUN apt-get update && apt install git python3-pip
 RUN update-alternatives --install /usr/bin/python /usr/bin/python3 2
