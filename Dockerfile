@@ -12,4 +12,4 @@ COPY . .
 EXPOSE 15000
 
 CMD ["node", "server.js"]
-#CMD ["node", "server.js 15000 /playbooks"]
+#CMD ["node", "server.js 15000 ./playbooks"]
