@@ -2,8 +2,8 @@ FROM python
 ENV NODE_ENV=production
 RUN apt-get update && apt -y --force-yes install git python3-pip
 RUN pip install ansible
-RUN apt install nodejs npm
-RUN npm install node-ansible
+RUN apt -y --force-yes install nodejs npm
+RUN npm -y --force-yes install node-ansible
 
 WORKDIR /LTE-Ansible-
 
