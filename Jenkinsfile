@@ -3,13 +3,6 @@ pipeline {
        label "deploy" 
     }
     stages {
-	   stage("running status")
-            {
-             steps
-            	{
-                updateGitHubCommitStatus name: 'build', state: 'running'
-            	}
-       	    }
 
           stage("connect") {
              steps {
@@ -24,15 +17,4 @@ pipeline {
              }
           }
         }
-    post 
-	{
-	    failure 
-		    {
-                updateGitHubCommitStatus name: 'build', state: 'failed'
-	    	}
-	    		success 
-	    	{
-			    updateGitHubCommitStatus name: 'build', state: 'success'
-		    }
-	}
 }
