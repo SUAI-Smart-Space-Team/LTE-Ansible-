@@ -20,11 +20,11 @@ pipeline {
 	{
 	    failure 
 		    {
-                updateGitlabCommitStatus name: 'build', state: 'failed'
+                updateGitHubCommitStatus name: 'build', state: 'failed'
 	    	}
 	    		success 
 	    	{
-			    updateGitlabCommitStatus name: 'build', state: 'success'
+			    updateGitHubCommitStatus name: 'build', state: 'success'
 		    }
 	}
 }
