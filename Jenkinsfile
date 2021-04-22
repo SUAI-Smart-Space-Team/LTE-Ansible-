@@ -3,6 +3,14 @@ pipeline {
        label "deploy" 
     }
     stages {
+	   stage("running status")
+            {
+             steps
+            	{
+                updateGitlabCommitStatus name: 'build', state: 'running'
+            	}
+       	    }
+
           stage("connect") {
              steps {
                script {
