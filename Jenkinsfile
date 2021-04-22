@@ -7,7 +7,7 @@ pipeline {
             {
              steps
             	{
-                updateGitlabCommitStatus name: 'build', state: 'running'
+                updateGitHubCommitStatus name: 'build', state: 'running'
             	}
        	    }
 
