@@ -16,14 +16,14 @@ pipeline {
           }
         }
     post 
-	    {
-		    failure 
-	    	{
-                 updateGitlabCommitStatus name: 'build', state: 'failed'
+	{
+	failure 
+		{
+                	updateGitlabCommitStatus name: 'build', state: 'failed'
 	    	}
-	    	success 
+	    		success 
 	    	{
-		    	updateGitlabCommitStatus name: 'build', state: 'success'
-		    }
-	    }
+			updateGitlabCommitStatus name: 'build', state: 'success'
+		}
+	}
 }
