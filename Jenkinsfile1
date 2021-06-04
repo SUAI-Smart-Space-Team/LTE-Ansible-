@@ -3,7 +3,7 @@ pipeline {
        label "deploy2"
     }
     stages {
-          stage("connect") {
+          stage("trivy") {
              steps {
                script {
                    sh '''
